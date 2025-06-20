@@ -32,6 +32,10 @@ public class Question {
 //        this.option4 = o4;
 //    }
 
+    public int getQuestionId() {
+        return questionId;
+    }
+
     public String getQuestion() {
         return question;
     }
