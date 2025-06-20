@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 //@Controller
-@RequestMapping("/questions")
+@RequestMapping("/admin/questions")
 public class QuesionsController {
 
     @Autowired
@@ -26,22 +26,22 @@ public class QuesionsController {
         return quesionService.getAllQuestions();
     }
 
-    @GetMapping("/getGenQuestion")
+    @GetMapping("/general")
     public List<Question> getGenQuestion() {
         return quesionService.getGenQuestions();
     }
 
-    @GetMapping("/getMlQuestion")
+    @GetMapping("/ml")
     public List<Question> getMlQuestion() {
         return quesionService.getMLQuestionsList();
     }
 
-    @GetMapping("/getAiQuestion")
+    @GetMapping("/ai")
     public List<Question> getAiQuestion() {
         return quesionService.getAiQuestions();
     }
 
-    @GetMapping("/getDsaQuestion")
+    @GetMapping("/dsa")
     public List<Question> getDsaQuestion() {
         return quesionService.getDsaQuestions();
     }

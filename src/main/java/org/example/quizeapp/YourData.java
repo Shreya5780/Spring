@@ -6,22 +6,28 @@ import java.util.List;
 public class YourData {
 
     List<Question> questions;
-//    private String choose;
+
+    List<String> answers;
+
     private String score;
 
-    public YourData(List<Question> question,  String score){
-        this.score = score;
-        this.questions = question;
+    public YourData(List<Question> question,  List<String> answers, String score) {
+       this.questions = question;
+       this.answers = answers;
+       this.score = score;
 
     }
 
-    public List<Question> getQuestions(){
+
+    public List<Question> getQuestions() {
         return questions;
     }
 
+    public List<String> getAnswers() {
+        return answers;
+    }
 
-
-    public String getScore(){
+    public String getScore() {
         return score;
     }
 }

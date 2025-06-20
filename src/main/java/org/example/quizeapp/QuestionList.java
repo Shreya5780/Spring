@@ -14,15 +14,15 @@ public class QuestionList {
     @Bean
     public List<Question> genquestionsList() {
             return Arrays.asList(
-                    new Question("What is the capital of France?",
+                    new Question("1","What is the capital of France?",
                             "A", "London", "Berlin", "Rome", "Paris"),
-                    new Question("Which planet is known as the Red Planet?",
+                    new Question("2","Which planet is known as the Red Planet?",
                             "D", "Mars", "Jupiter", "Venus", "Mars"),
-                    new Question("Who wrote 'Hamlet'?",
+                    new Question("3","Who wrote 'Hamlet'?",
                             "D", "Dickens", "Hemingway", "Tolkien", "Shakespeare"),
-                    new Question("What is the boiling point of water?",
+                    new Question("4","What is the boiling point of water?",
                             "C", "100°C", "110°C", "120°C", "100°C"),
-                    new Question("Which language runs in a web browser?",
+                    new Question("5","Which language runs in a web browser?",
                             "D", "C", "Python", "Java", "JavaScript")
             );
         }
@@ -31,15 +31,15 @@ public class QuestionList {
     public List<Question> mlquestionsList() {
         return Arrays.asList(
                 // Machine Learning
-                new Question("What is the main goal of supervised learning?",
+                new Question("1","What is the main goal of supervised learning?",
                         "D", "Predict outcomes based on labeled data", "Reduce dimensionality", "Cluster data into groups", "Predict outcomes based on labeled data"),
-                new Question("Which algorithm is commonly used for classification tasks?",
+                new Question("2","Which algorithm is commonly used for classification tasks?",
                         "A", "Linear Regression", "Decision Tree", "PCA", "Decision Tree"),
-                new Question("What does overfitting mean in machine learning?",
+                new Question("3","What does overfitting mean in machine learning?",
                         "C", "Model performs poorly on both training and test data", "Model has too few parameters", "Model uses unsupervised learning", "Model performs well on training data but poorly on new data"),
-                new Question("Which metric is best for evaluating a classification model?",
+                new Question("4","Which metric is best for evaluating a classification model?",
                         "A", "Accuracy", "R-squared", "Euclidean Distance", "Accuracy"),
-                new Question("What is the purpose of cross-validation?",
+                new Question("5","What is the purpose of cross-validation?",
                         "B", "To reduce model complexity", "To evaluate model performance on unseen data", "To normalize features", "To evaluate model performance on unseen data")
                 );
     }
@@ -50,15 +50,15 @@ public class QuestionList {
 
         return Arrays.asList(
         // Artificial Intelligence
-        new Question("Which branch of AI deals with mimicking human reasoning?",
+        new Question("1","Which branch of AI deals with mimicking human reasoning?",
                 "A", "Expert Systems", "Robotics", "Natural Language Processing", "Expert Systems"),
-                new Question("What is the Turing Test used for?",
+                new Question("2","What is the Turing Test used for?",
                         "B", "Testing AI's ability to exhibit human-like intelligence", "Evaluating neural networks", "Checking data quality", "Testing AI's ability to exhibit human-like intelligence"),
-                new Question("Which AI technique is used in self-driving cars for decision-making?",
+                new Question("3","Which AI technique is used in self-driving cars for decision-making?",
                         "C", "Rule-Based Systems", "Reinforcement Learning", "Clustering", "Reinforcement Learning"),
-                new Question("What is the role of a knowledge base in an expert system?",
+                new Question("4","What is the role of a knowledge base in an expert system?",
                         "D", "Store rules and facts", "Perform image recognition", "Generate random outputs", "Store rules and facts"),
-                new Question("Which AI field focuses on understanding and generating human language?",
+                new Question("5","Which AI field focuses on understanding and generating human language?",
                         "C", "NLP", "Robotics", "Deep Learning", "NLP")
                 );
     }
@@ -68,15 +68,15 @@ public class QuestionList {
         return Arrays.asList(
 
                 // Data Structures & Algorithms
-                new Question("Which data structure uses LIFO (Last In First Out)?",
+                new Question("1","Which data structure uses LIFO (Last In First Out)?",
                         "C", "Stack", "Array", "Linked List", "Stack"),
-                new Question("What is the time complexity of binary search in a sorted array?",
+                new Question("2","What is the time complexity of binary search in a sorted array?",
                         "C", "O(log n)", "O(n log n)", "O(1)", "O(log n)"),
-                new Question("Which sorting algorithm is considered the fastest in average case?",
+                new Question("3","Which sorting algorithm is considered the fastest in average case?",
                         "B", "Merge Sort", "Quick Sort", "Selection Sort", "Quick Sort"),
-                new Question("What is a hash table used for?",
+                new Question("4","What is a hash table used for?",
                         "A", "Searching data efficiently", "Storing hierarchical data", "Traversing graphs", "Searching data efficiently"),
-                new Question("Which graph traversal algorithm uses a queue?",
+                new Question("5","Which graph traversal algorithm uses a queue?",
                         "D", "Breadth-First Search", "Dijkstra’s Algorithm", "Kruskal’s Algorithm", "Breadth-First Search")
         );
     }

@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 
 public class Question {
 
-
+    private String questionId;
     private String question;
     private String answer;
     private String option1;
@@ -32,7 +32,7 @@ public class Question {
 //        this.option4 = o4;
 //    }
 
-    public int getQuestionId() {
+    public String getQuestionId() {
         return questionId;
     }
 

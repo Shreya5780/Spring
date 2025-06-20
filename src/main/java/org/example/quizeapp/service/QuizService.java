@@ -1,5 +1,6 @@
 package org.example.quizeapp.service;
 
+import org.example.quizeapp.Answer;
 import org.example.quizeapp.Question;
 import org.example.quizeapp.YourData;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,8 @@ public class QuizService {
    @Autowired
    QuesionService quesionService;
 
-    public void Quiz(String subject) {
+    public List<Question> getQuiz(String subject) {
+        System.out.println("Subject: " + subject);
         if(subject.equalsIgnoreCase("General")){
             questionList = quesionService.getGenQuestions();
         }else if(subject.equalsIgnoreCase("ML")){
@@ -34,41 +36,31 @@ public class QuizService {
             questionList = new ArrayList<>();
         }
 
-
+        return questionList;
     }
 
-    public List<YourData> QuizStarted(){
-        System.out.println("Quiz Started");
+    public List<YourData> getYourDataList(List<Question> questions, List<String> answer) {
         int score=0;
-        yourDataList.clear();
-        for(Question question : questionList){
-//            System.out.println(question);
-            System.out.println(question.getQuestion());
-            System.out.println("Choose correct ans A/B/C/D");
-            System.out.println(question.getOption1());
-            System.out.println(question.getOption2());
-            System.out.println(question.getOption3());
-            System.out.println(question.getOption4());
-
-            Scanner sc = new Scanner(System.in);
-            String choose = sc.nextLine().toLowerCase();
-//            right now using console so i take input and use it because i don't able to find how the post request actually works
-
-           if(choose.equals(question.getAnswer().toLowerCase())){
-               score++;
-
-           }else {
-               System.out.println("Wrong answer.");
-           }
-
+        System.out.println("Score: " + score);
+        for(int i=0; i<answer.size();i++) {
+//            System.out.println("Question: " + questions.get(i));
+//            System.out.println("Your Answer: " + answer.get(i));
+//            System.out.println("Correct Answer: " + questions.get(i).getAnswer());
+            if((questions.get(i).getAnswer()).equalsIgnoreCase(answer.get(i))){
+                score++;
+//                System.out.println("Score: " + score);
+            }
 
         }
-
         String scorestr = "You Score " + score + " / " + questionList.size();
-        YourData yourData = new YourData(questionList,  scorestr);
+//        String choose="A";
+        YourData yourData = new YourData(questionList, answer, scorestr);
         yourDataList.add(yourData);
+
         return yourDataList;
     }
+
+
 
 
 }
