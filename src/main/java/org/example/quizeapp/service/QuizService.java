@@ -15,13 +15,11 @@ import java.util.Scanner;
 //here the service is component behind the scene
 public class QuizService {
 
-    List<Question> questionList;
 
-    List<YourData> yourDataList = new ArrayList<>();
 
-   @Autowired
+    @Autowired
    QuesionService quesionService;
-
+    List<Question> questionList;
     public List<Question> getQuiz(String subject) {
         System.out.println("Subject: " + subject);
         if(subject.equalsIgnoreCase("General")){
@@ -39,22 +37,24 @@ public class QuizService {
         return questionList;
     }
 
+
     public List<YourData> getYourDataList(List<Question> questions, List<String> answer) {
-        int score=0;
+        List<YourData> yourDataList = new ArrayList<>();
+         int score=0;
         System.out.println("Score: " + score);
         for(int i=0; i<answer.size();i++) {
-//            System.out.println("Question: " + questions.get(i));
-//            System.out.println("Your Answer: " + answer.get(i));
-//            System.out.println("Correct Answer: " + questions.get(i).getAnswer());
+            System.out.println("Question: " + questions.get(i));
+            System.out.println("Your Answer: " + answer.get(i));
+            System.out.println("Correct Answer: " + questions.get(i).getAnswer());
             if((questions.get(i).getAnswer()).equalsIgnoreCase(answer.get(i))){
                 score++;
 //                System.out.println("Score: " + score);
             }
 
         }
-        String scorestr = "You Score " + score + " / " + questionList.size();
+        String scorestr = "You Score " + score + " / " + questions.size();
 //        String choose="A";
-        YourData yourData = new YourData(questionList, answer, scorestr);
+        YourData yourData = new YourData(questions, answer, scorestr);
         yourDataList.add(yourData);
 
         return yourDataList;
