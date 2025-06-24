@@ -1,6 +1,5 @@
 package org.example.quizeapp.service;
 
-import org.example.quizeapp.Answer;
 import org.example.quizeapp.Question;
 import org.example.quizeapp.YourData;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 @Service
 
@@ -19,8 +17,8 @@ public class QuizService {
 
     @Autowired
    QuesionService quesionService;
-    List<Question> questionList;
     public List<Question> getQuiz(String subject) {
+        List<Question> questionList;
         System.out.println("Subject: " + subject);
         if(subject.equalsIgnoreCase("General")){
             questionList = quesionService.getGenQuestions();

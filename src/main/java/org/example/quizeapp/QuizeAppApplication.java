@@ -1,22 +1,24 @@
 package org.example.quizeapp;
 
-import org.example.quizeapp.controller.DisplayQuestions;
-import org.example.quizeapp.controller.StartQuiz;
-import org.example.quizeapp.service.QuizService;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 @SpringBootApplication
-public class QuizeAppApplication {
+@EnableMongoRepositories(basePackages = "com.repository")
+@ComponentScan(basePackages = "com")
+public class QuizeAppApplication implements CommandLineRunner {
 
     public static void main(String[] args) {
 
         SpringApplication.run(QuizeAppApplication.class, args);
 
-
-
-//        StartQuiz startQuiz = new StartQuiz();
-
     }
 
+    @Override
+    public void run(String... args) throws Exception {
+
+    }
 }
