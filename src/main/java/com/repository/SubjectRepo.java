@@ -1,13 +1,13 @@
 package com.repository;
 
-import com.mongo.model.QuizSubject;
+import com.mongo.model.SubjectModel;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface MainRepository extends MongoRepository<QuizSubject, String> {
+public interface SubjectRepo extends MongoRepository<SubjectModel, String> {
 
-    QuizSubject findBySubjectName(String subjectName);
+    SubjectModel findBySubjectName(String subjectName);
 
 
 }

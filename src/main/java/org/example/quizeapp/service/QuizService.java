@@ -16,18 +16,18 @@ public class QuizService {
 
 
     @Autowired
-   QuesionService quesionService;
+    QuesionServic quesionServic;
     public List<Question> getQuiz(String subject) {
         List<Question> questionList;
         System.out.println("Subject: " + subject);
         if(subject.equalsIgnoreCase("General")){
-            questionList = quesionService.getGenQuestions();
+            questionList = quesionServic.getGenQuestions();
         }else if(subject.equalsIgnoreCase("ML")){
-            questionList = quesionService.getMLQuestionsList();
+            questionList = quesionServic.getMLQuestionsList();
         }else if(subject.equalsIgnoreCase("AI")){
-            questionList = quesionService.getAiQuestions();
+            questionList = quesionServic.getAiQuestions();
         }else if(subject.equalsIgnoreCase("DSA")){
-            questionList = quesionService.getDsaQuestions();
+            questionList = quesionServic.getDsaQuestions();
         }else {
             questionList = new ArrayList<>();
         }

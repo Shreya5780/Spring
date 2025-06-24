@@ -13,7 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @Getter
 @Setter
-public class QuizSubject {
+public class SubjectModel {
     @Id
     private String id;
     private String subjectName;

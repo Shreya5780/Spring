@@ -1,7 +1,7 @@
 package com.service;
 
-import com.mongo.model.QuizSubject;
-import com.repository.MainRepository;
+import com.mongo.model.SubjectModel;
+import com.repository.SubjectRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,53 +13,53 @@ import java.util.List;
 @Service
 public class SubjectService {
     @Autowired
-    MainRepository mainRepository;
+    SubjectRepo subjectRepo;
 
     public ResponseEntity<String> addSubject(@PathVariable String subject){
 
-        QuizSubject quizSubject =new QuizSubject();
-        quizSubject.setId(null);
-        quizSubject.setSubjectName(subject.toUpperCase());
+        SubjectModel subjectModel =new SubjectModel();
+        subjectModel.setId(null);
+        subjectModel.setSubjectName(subject.toUpperCase());
 //        System.out.println(quizSubject.getSubjectName());
-        mainRepository.save(quizSubject);
+        subjectRepo.save(subjectModel);
 
         return ResponseEntity.status(HttpStatus.CREATED).body("Success, " + subject + " added successfully");
 
 //        return "Subject " +  subject + " added successfully";
     }
 
-    public QuizSubject getSubject(@PathVariable String subject){
-        QuizSubject quizSubject =   mainRepository.findBySubjectName(subject.toUpperCase());
-        if(quizSubject == null){
-            return quizSubject;
+    public SubjectModel getSubject(@PathVariable String subject){
+        SubjectModel subjectModel =   subjectRepo.findBySubjectName(subject.toUpperCase());
+        if(subjectModel == null){
+            return subjectModel;
 //            return "Subject " +  subject + " not found";
         }
-        return quizSubject;
+        return subjectModel;
 //        return ResponseEntity.ok("Subject found " + quizSubject.getSubjectName() + " with id " + quizSubject.getId());
 //        return "Subject found " +  quizSubject.getSubjectName() + " with id " + quizSubject.getId();
 
     }
 
-    public List<QuizSubject> getAllSubjects(){
-        return mainRepository.findAll();
+    public List<SubjectModel> getAllSubjects(){
+        return subjectRepo.findAll();
     }
 
     public ResponseEntity<String> updateSubject(@PathVariable String subjectId,@RequestParam String subjectName){
-        QuizSubject quizSubject = mainRepository.findById(subjectId).orElse(null);
-        if(quizSubject == null){
+        SubjectModel subjectModel = subjectRepo.findById(subjectId).orElse(null);
+        if(subjectModel == null){
             return ResponseEntity.notFound().build();
         }
-        quizSubject.setSubjectName(subjectName.toUpperCase());
-        mainRepository.save(quizSubject);
+        subjectModel.setSubjectName(subjectName.toUpperCase());
+        subjectRepo.save(subjectModel);
         return ResponseEntity.status(HttpStatus.RESET_CONTENT).body("Success, " + subjectName + " updated successfully");
     }
 
     public ResponseEntity<String> deleteSubject(@PathVariable String subjectId) {
-        QuizSubject quizSubject = mainRepository.findById(subjectId).orElse(null);
-        if (quizSubject == null) {
+        SubjectModel subjectModel = subjectRepo.findById(subjectId).orElse(null);
+        if (subjectModel == null) {
             return ResponseEntity.notFound().build();
         }
-        mainRepository.delete(quizSubject);
+        subjectRepo.delete(subjectModel);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Successfully deleted successfully");
     }
 }

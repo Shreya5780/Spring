@@ -1,6 +1,6 @@
 package com.controller;
 
-import com.mongo.model.QuizSubject;
+import com.mongo.model.SubjectModel;
 import com.service.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,14 +23,14 @@ public class SubjectController {
     }
 
     @GetMapping("/get/{subject}")
-    public QuizSubject get(@PathVariable String subject){
+    public SubjectModel get(@PathVariable String subject){
 
          return subjectService.getSubject(subject);
 
     }
 
     @GetMapping("/getall")
-    public List<QuizSubject> getAll(){
+    public List<SubjectModel> getAll(){
         return subjectService.getAllSubjects();
     }
 
