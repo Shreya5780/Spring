@@ -1,6 +1,8 @@
 package com.service;
 
+import com.mongo.model.QuestionModel;
 import com.mongo.model.SubjectModel;
+import com.repository.QuestionRepo;
 import com.repository.SubjectRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,7 +17,10 @@ public class SubjectService {
     @Autowired
     SubjectRepo subjectRepo;
 
-    public ResponseEntity<String> addSubject(@PathVariable String subject){
+    @Autowired
+    QuestionRepo questionRepo;
+
+    public ResponseEntity<String> addSubject( String subject){
 
         SubjectModel subjectModel =new SubjectModel();
         subjectModel.setId(null);
@@ -28,15 +33,13 @@ public class SubjectService {
 //        return "Subject " +  subject + " added successfully";
     }
 
-    public SubjectModel getSubject(@PathVariable String subject){
+    public SubjectModel getSubject( String subject){
         SubjectModel subjectModel =   subjectRepo.findBySubjectName(subject.toUpperCase());
         if(subjectModel == null){
-            return subjectModel;
+           throw new IllegalArgumentException("Subject not found")  ;
 //            return "Subject " +  subject + " not found";
         }
         return subjectModel;
-//        return ResponseEntity.ok("Subject found " + quizSubject.getSubjectName() + " with id " + quizSubject.getId());
-//        return "Subject found " +  quizSubject.getSubjectName() + " with id " + quizSubject.getId();
 
     }
 
@@ -44,22 +47,29 @@ public class SubjectService {
         return subjectRepo.findAll();
     }
 
-    public ResponseEntity<String> updateSubject(@PathVariable String subjectId,@RequestParam String subjectName){
+    public ResponseEntity<String> updateSubject( String subjectId, String subjectName){
         SubjectModel subjectModel = subjectRepo.findById(subjectId).orElse(null);
         if(subjectModel == null){
-            return ResponseEntity.notFound().build();
+            throw new IllegalArgumentException("Subject not found")  ;
         }
         subjectModel.setSubjectName(subjectName.toUpperCase());
         subjectRepo.save(subjectModel);
         return ResponseEntity.status(HttpStatus.RESET_CONTENT).body("Success, " + subjectName + " updated successfully");
     }
 
-    public ResponseEntity<String> deleteSubject(@PathVariable String subjectId) {
+    public ResponseEntity<String> deleteSubject( String subjectId) {
         SubjectModel subjectModel = subjectRepo.findById(subjectId).orElse(null);
         if (subjectModel == null) {
-            return ResponseEntity.notFound().build();
+            throw new IllegalArgumentException("Subject not found")  ;
         }
         subjectRepo.delete(subjectModel);
+
+        List<QuestionModel> questions = questionRepo.findQuestionBySubjectId(subjectId);
+
+        for (QuestionModel question : questions) {
+            questionRepo.delete(question);
+        }
+
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Successfully deleted successfully");
     }
 }

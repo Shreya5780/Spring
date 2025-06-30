@@ -1,8 +1,10 @@
 package com.service;
 
+import com.controller.SubjectController;
 import com.mongo.model.QuestionModel;
 import com.mongo.model.SubjectModel;
 import com.repository.QuestionRepo;
+import com.repository.SubjectRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,12 +21,28 @@ public class QuestionService {
     @Autowired
     QuestionRepo questionRepo;
 
+    @Autowired
+    SubjectRepo subjectRepo;
+
     public List<QuestionModel> getQuestionsBySubject(String subjectId){
+        //i need to check if subject is present or not
+        SubjectModel subject = subjectRepo.findById(subjectId).orElse(null);
+        if (subject == null) {
+
+            throw new IllegalArgumentException("Subject not found")  ;
+        }
 
         return questionRepo.findQuestionBySubjectId(subjectId);
     }
 
     public QuestionModel addQuestionsBySubject(String subjectId, QuestionModel questionInfo){
+
+        SubjectModel subject = subjectRepo.findById(subjectId).orElse(null);
+        if (subject == null) {
+
+            throw new IllegalArgumentException("Subject not found")  ;
+        }
+
         QuestionModel question = new QuestionModel();
 
         question.setQid(null);
@@ -43,36 +61,18 @@ public class QuestionService {
     }
 
     public QuestionModel updateQuestionsBySubject(String questionId, QuestionModel questionInfo){
+
         QuestionModel question = questionRepo.findById(questionId).orElse(null);
 
         if(question == null){
-            System.out.println("Question not found.");
-            return questionInfo;
+            throw new IllegalArgumentException("Question not found")  ;
         }
 
-        /**
-         * this is slower
-         * so you can use this alternate also using if but this is difficult for large no. of fields
-         */
-//        Field[] fields = question.getClass().getDeclaredFields();
-//        for(Field field : fields){
-//            field.setAccessible(true);
-//            System.out.println(field.getName());
-//
-//            try {
-//               Object newValue = field.get(questionInfo);
-//               if(newValue != null){
-//                   field.set(question, newValue);
-//                   System.out.println(newValue + " " + field.getName());
-//               }
-//               else{
-////                   field.set(question, field.get(question));
-//                   System.out.println(field.getName() + " " + field.get(question));
-//               }
-//            } catch (IllegalAccessException e) {
-//                throw new RuntimeException(e);
-//            }
-//        }
+        SubjectModel subject = subjectRepo.findById(question.getSubjectId()).orElse(null);
+        if (subject == null) {
+
+            throw new NullPointerException("Subject name")  ;
+        }
 
        if(questionInfo.getQuestion() != null)  question.setQuestion(questionInfo.getQuestion());
        if(questionInfo.getAnswer() != null) question.setAnswer(questionInfo.getAnswer());
@@ -80,6 +80,7 @@ public class QuestionService {
        if(questionInfo.getOption2() != null) question.setOption2(questionInfo.getOption2());
        if(questionInfo.getOption3() != null) question.setOption3(questionInfo.getOption3());
        if(questionInfo.getOption4() != null) question.setOption4(questionInfo.getOption4());
+       if(questionInfo.getSubjectId() != null) question.setSubjectId(questionInfo.getSubjectId());
 
        questionRepo.save(question);
 
@@ -87,11 +88,12 @@ public class QuestionService {
 
     }
 
-    public ResponseEntity<String> deleteSubject(@PathVariable String questionId) {
+    public ResponseEntity<String> deleteSubject(String questionId) {
         QuestionModel questionModel = questionRepo.findById(questionId).orElse(null);
         if (questionModel == null) {
-            return ResponseEntity.notFound().build();
+            throw new IllegalArgumentException("Question not found")  ;
         }
+
         questionRepo.delete(questionModel);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Successfully deleted successfully");
     }
